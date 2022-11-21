@@ -1,0 +1,7 @@
+export OS_AUTH_URL=Token-based authorization, I believe
+export OS_IDENTITY_API_VERSION=3
+export OS_PROJECT_NAME=I'm not sure
+export OS_PROJECT_DOMAIN_NAME=I'm not sure either
+export OS_USERNAME=bluedestiny88
+export OS_USER_DOMAIN_NAME=Oh I don't know 
+export OS_PASSWORD=Oh man I really don't know

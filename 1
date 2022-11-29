@@ -8,13 +8,9 @@ import requests
 app = Flask(__name__)
 pokemon = "https://pokeapi.co/api/v2/pokemon/"
 
-# Would this also technically fulfill the requirement for mini-project 1 if I decide to
-# make a new project for mini-project 2?
 @app.route("/starterpoke/<character>")
 def choose(character):
-    print(f"Hello {character}! \n")
-    # input won't work in flask, unfortunately.
-
+    print(f"Hello {character}!")
     color = input("Pick a color: red, green, blue, yellow \n")
     starter = ""
     if color == "red":
@@ -28,8 +24,7 @@ def choose(character):
     ## Return statement needed for else?
     getthatpokemon  = requests.get(pokemon + starter)
     pokemondata = getthatpokemon.json()
-    attack = pokemondata["abilities"][0]["ability"]["name"]
-    return f"{starter.capitalize()} used {attack.capitalize()}! It's super effective!"
+    return pokemondata["abilities"]["0"][1]
 
 @app.route("/start/")
 def start():

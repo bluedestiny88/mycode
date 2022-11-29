@@ -2,42 +2,39 @@
 
 # The following code contains the endpoints using Flask
 
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, render_template
 import requests
 
 app = Flask(__name__)
 pokemon = "https://pokeapi.co/api/v2/pokemon/"
 
-# Would this also technically fulfill the requirement for mini-project 1 if I decide to
-# make a new project for mini-project 2?
+@app.route("/")
+def start():
+    # go to lab 100 and borrow the postmaker.html, render that here. Ask for the player to choose red, green, blue, or yellow
+    return render_template()
+
+# this can count as mini project 1 as well, sure!
 @app.route("/starterpoke", methods= ["POST"])
 def choose():
-    # input won't work in flask, unfortunately.
-    # grabs value from postmaker.html
-    color= request.form.get("nm")
-
+    color = request.form.get("nm")
     if color == "red":
-        starter = "charmander"
+        starter= "charmander"
     elif color == "green":
-        starter == "bulbasaur"
+        starter= "bulbasaur"
     elif color == "blue":
-        starter == "squirtle"
+        starter= "squirtle"
     elif color == "yellow":
-        starter == "pikachu"
+        starter= "pikachu"
     else:
         starter= "muk"
     
-    ## Return statement needed for else?
-    getthatpokemon  = requests.get(pokemon + starter)
+    getthatpokemon  = requests.get(pokemon + starter.lower())
     pokemondata = getthatpokemon.json()
     attack = pokemondata["abilities"][0]["ability"]["name"]
-    return f"Hello! Your starting Pokemon is {starter}! \n {starter.capitalize()} used {attack.capitalize()}! It's super effective!"
 
-@app.route("/start/")
-def start():
-    # take postmaker.html from an earlier lab. Have it ask to choose one of the following colors: red, green, blue, or yellow.
-    # change the POST address to /starterpoke
-    return render_template("choice.html")
+    # you could return this string as jinja2 html quite easily! that'd finish off the project real quick!
+    return f"Your starter {starter.capitalize()} used {attack.capitalize()}! It's super effective!"
+
 
 if __name__ == "__main__":
     app.run(host = "0.0.0.0", port = 2224)

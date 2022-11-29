@@ -56,7 +56,7 @@ def choose():
         starter= "pikachu"
     else:
         starter= "muk"
-    
+
     getthatpokemon  = requests.get(pokemon + starter.lower())
     pokemondata = getthatpokemon.json()
     attack = pokemondata["abilities"][0]["ability"]["name"]
@@ -67,6 +67,6 @@ def choose():
 @app.route("/whosthatpokemon", methods=["GET"])
 def whosthat():
     return data
-    
+
 if __name__ == "__main__":
     app.run(host = "0.0.0.0", port = 2224)
